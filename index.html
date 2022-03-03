@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <link rel="stylesheet" href="./styles/style.css">
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+  <title>Frontend Mentor | IP Address Tracker</title>
+  <script src="https://kit.fontawesome.com/a85ef4a7c1.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/joeymalvinni/webrtc-ip/dist/bundle.dev.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>ip address tracker</h1>
+      <div class="input">
+        <input type="text" id="ip" placeholder="Search for any Ip address or domain">
+        <span id="search" class="go"></span>
+      </div>
+      <div class="info">
+        <div>
+          <span>ip address</span>
+          <span id="current-ip">-</span>
+        </div>
+        <div>
+          <span>location</span>
+          <span id="location">-</span>
+        </div>
+        <div>
+          <span>timezone</span>
+          <span id="timezone">-</span>
+        </div>
+        <div>
+          <span>isp</span>
+          <span id="isp">-</span>
+        </div>
+      </div>
+    </header>
+    <div id="map" class="map"></div>
+  </div>
+  <footer class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+    Coded by <a href="#">Abdulekrim Awad</a>.
+  </footer>
+  <script src="./index.js"></script>
+</body>
+
+</html>
