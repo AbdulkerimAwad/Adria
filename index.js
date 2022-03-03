@@ -36,15 +36,7 @@ async function getData(domainOrIp) {
     );
   }
 
-  if (response.status >= 200 && response.status <= 299) {
-
     data = await response.json();
-
-  } else {
-
-    console.log('Error');
-
-  }
 
   showData(data);
 
