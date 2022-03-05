@@ -73,11 +73,11 @@ let showData = (data) => {
 };
 
 // set current data (for first loading)
-window.onload = async function () {
-  let currentIp = await getIPs().then((res) => res.join(""));
+// window.onload = async function () {
+//   let currentIp = await getIPs().then((res) => res.join(""));
 
-  getData(currentIp);
-};
+//   getData(currentIp);
+// };
 
 document.getElementById("search").addEventListener("click", () => {
 
