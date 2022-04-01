@@ -1,7 +1,7 @@
 let map = L.map("map", {
   zoomControl: false,
   maxBoundsViscosity: 1.0,
-  worldCopyJump: true
+  worldCopyJump: true,
 });
 
 L.tileLayer(
@@ -22,32 +22,20 @@ L.tileLayer(
 /* -------------------------------------------------------------------------- */
 
 async function getData(domainOrIp) {
-  let pattern = /\d+.\d+.\d+.\d+/,
-    response,
-    data;
+  // let pattern = /\d+.\d+.\d+.\d+/,
+  let response, data;
 
-  if (pattern.test(domainOrIp)) {
-    response = await fetch(
-      `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}`
-    );
-  } else {
-    response = await fetch(
-      `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&domain=${domainOrIp}`
-    );
-  }
+  response = await fetch(
+    `https://api.ipgeolocation.io/ipgeo/?apiKey=18857f4cab7e49daa74a150f4cbd1856&ip=${domainOrIp}`
+  );
 
-  if (response.status >= 200 && response.status <= 299) {
+  data = await response.json();
 
-    data = await response.json();
-
-  } else {
-
-    console.log('Error');
-
+  if (data.ip === undefined) {
+    return null;
   }
 
   showData(data);
-
 }
 
 let marker = L.marker([50, 50]);
@@ -57,27 +45,30 @@ let showData = (data) => {
   document.getElementById("current-ip").textContent = data.ip;
   document.getElementById(
     "location"
-  ).textContent = `${data.location.country}, ${data.location.region}`;
-  document.getElementById(
-    "timezone"
-  ).textContent = `UTC${data.location.timezone}`;
+  ).textContent = `${data.country_code2}, ${data.state_prov}`;
+  document.getElementById("timezone").textContent = `UTC${
+    data.time_zone.offset > 0 ? "+" + data.time_zone.offset : ""
+  }:00`;
   document.getElementById("isp").textContent = data.isp;
 
   // map display
-  let { lat, lng } = data.location;
-
   let myIcon = L.icon({
     iconUrl: "./images/icon-location.svg",
   });
 
-  map.setView([lat + 0.01, lng], 13);
+  map.setView(
+    [+(+data.latitude).toFixed(2) + 0.01, (+data.longitude).toFixed(2)],
+    13
+  );
 
   marker.remove();
-  
-  marker = L.marker([lat, lng], { icon: myIcon });
+
+  marker = L.marker(
+    [(+data.latitude).toFixed(2), (+data.longitude).toFixed(2)],
+    { icon: myIcon }
+  );
 
   marker.addTo(map);
-
 };
 
 // set current data (for first loading)
@@ -88,13 +79,5 @@ window.onload = async function () {
 };
 
 document.getElementById("search").addEventListener("click", () => {
-
   getData(document.getElementById("ip").value);
-
 });
-
-/*
-    {"ip":"142.250.68.14","location":{"country":"US","region":"California","timezone":"-08:00"},"domains":["0294197869557992875298820958770566345948.page.link","04day.page.link","08288467059939573940290485384939900786085887282199.page.link","1452dcvbgf1.page.link","15sof.page.link"],"as":{"asn":15169,"name":"GOOGLE","route":"142.250.0.0\/15","domain":"https:\/\/about.google\/intl\/en\/","type":"Content"},"isp":"Google LLC"}
-
-    {"ip":"48.251.15.231","location":{"country":"US","region":"New Jersey","timezone":"-05:00"},"isp":"The Prudential Insurance Company of America"}
-*/

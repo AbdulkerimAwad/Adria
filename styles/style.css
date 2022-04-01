@@ -93,7 +93,7 @@ body .container header .info div span:nth-of-type(2) {
   margin-bottom: 1rem;
   color: #2e2e2e;
 }
-@media only screen and (min-width: 1000px) {
+@media only screen and (min-width: 1440px) {
   body .container header .info {
     display: flex;
     justify-content: space-between;
