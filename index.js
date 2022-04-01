@@ -29,11 +29,15 @@ async function getData(domainOrIp) {
     `https://api.ipgeolocation.io/ipgeo/?apiKey=18857f4cab7e49daa74a150f4cbd1856&ip=${domainOrIp}`
   );
 
+<<<<<<< HEAD
   data = await response.json();
 
   if (data.ip === undefined) {
     return null;
   }
+=======
+    data = await response.json();
+>>>>>>> 132d272c19c1af70947cc7680a44b082ee54992e
 
   showData(data);
 }
@@ -72,11 +76,11 @@ let showData = (data) => {
 };
 
 // set current data (for first loading)
-window.onload = async function () {
-  let currentIp = await getIPs().then((res) => res.join(""));
+// window.onload = async function () {
+//   let currentIp = await getIPs().then((res) => res.join(""));
 
-  getData(currentIp);
-};
+//   getData(currentIp);
+// };
 
 document.getElementById("search").addEventListener("click", () => {
   getData(document.getElementById("ip").value);
