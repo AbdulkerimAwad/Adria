@@ -29,17 +29,15 @@ async function getData(domainOrIp) {
     `https://api.ipgeolocation.io/ipgeo/?apiKey=18857f4cab7e49daa74a150f4cbd1856&ip=${domainOrIp}`
   );
 
-<<<<<<< HEAD
   data = await response.json();
 
   if (data.ip === undefined) {
     return null;
   }
-=======
-    data = await response.json();
->>>>>>> 132d272c19c1af70947cc7680a44b082ee54992e
+  data = await response.json();
 
   showData(data);
+  
 }
 
 let marker = L.marker([50, 50]);
