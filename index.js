@@ -26,7 +26,7 @@ async function getData(domainOrIp) {
   let response, data;
 
   response = await fetch(
-    `https://api.ipgeolocation.io/ipgeo/?apiKey=18857f4cab7e49daa74a150f4cbd1856&ip=${domainOrIp}`
+    `https://api.ipgeolocation.io/ipgeo/?apiKey=18857f4cab7e49daa74a150f4cbd1856&ip=${domainOrIp}/allow-cors`, {mode: 'cors'}
   );
 
   data = await response.json();
