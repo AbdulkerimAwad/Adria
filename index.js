@@ -22,11 +22,10 @@ L.tileLayer(
 /* -------------------------------------------------------------------------- */
 
 async function getData(domainOrIp) {
-  // let pattern = /\d+.\d+.\d+.\d+/,
   let response, data;
 
   response = await fetch(
-    `https://api.ipgeolocation.io/ipgeo/?apiKey=18857f4cab7e49daa74a150f4cbd1856&ip=${domainOrIp}/allow-cors`, {mode: 'cors'}
+    `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}`
   );
 
   data = await response.json();
@@ -34,23 +33,21 @@ async function getData(domainOrIp) {
   if (data.ip === undefined) {
     return null;
   }
-  data = await response.json();
 
   showData(data);
-  
+
 }
 
 let marker = L.marker([50, 50]);
 
 let showData = (data) => {
+
   // show the data on the Dom
   document.getElementById("current-ip").textContent = data.ip;
   document.getElementById(
     "location"
-  ).textContent = `${data.country_code2}, ${data.state_prov}`;
-  document.getElementById("timezone").textContent = `UTC${
-    data.time_zone.offset > 0 ? "+" + data.time_zone.offset : ""
-  }:00`;
+  ).textContent = `${data.location.region}, ${data.location.city}`;
+  document.getElementById("timezone").textContent = `UTC${data.location.timezone}:00`;
   document.getElementById("isp").textContent = data.isp;
 
   // map display
@@ -59,14 +56,14 @@ let showData = (data) => {
   });
 
   map.setView(
-    [+(+data.latitude).toFixed(2) + 0.01, (+data.longitude).toFixed(2)],
+    [data.location.lat + 0.01, data.location.lng],
     13
   );
 
   marker.remove();
 
   marker = L.marker(
-    [(+data.latitude).toFixed(2), (+data.longitude).toFixed(2)],
+    [data.location.lat, data.location.lng],
     { icon: myIcon }
   );
 
