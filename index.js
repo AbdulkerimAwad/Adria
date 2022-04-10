@@ -25,7 +25,7 @@ async function getData(domainOrIp) {
   let response, data;
 
   response = await fetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}/allow-cors`
+    `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}`, {mode: 'cors'}
   );
 
   data = await response.json();
@@ -71,11 +71,11 @@ let showData = (data) => {
 };
 
 // set current data (for first loading)
-// window.onload = async function () {
-//   let currentIp = await getIPs().then((res) => res.join(""));
+window.onload = async function () {
+  let currentIp = await getIPs().then((res) => res.join(""));
 
-//   getData(currentIp);
-// };
+  getData(currentIp);
+};
 
 document.getElementById("search").addEventListener("click", () => {
   getData(document.getElementById("ip").value);
