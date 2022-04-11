@@ -25,7 +25,7 @@ async function getData(domainOrIp) {
   let response, data;
 
   response = await fetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}`, {mode: 'cors'}
+    `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}/allow-cors`, {mode: 'cors'}
   );
 
   data = await response.json();
