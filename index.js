@@ -25,7 +25,7 @@ async function getData(domainOrIp) {
   let response, data;
 
   response = await fetch(
-    `https://cors-anywhere.herokuapp.com/https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}`
+    `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}`
   );
 
   data = await response.json();
@@ -35,6 +35,7 @@ async function getData(domainOrIp) {
   }
 
   showData(data);
+
 }
 
 let marker = L.marker([50, 50]);
