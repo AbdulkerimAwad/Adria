@@ -25,7 +25,7 @@ async function getData(domainOrIp) {
   let response, data;
 
   response = await fetch(
-    `https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}/allow-cors`, {mode: 'cors'}
+    `https://cors-anywhere.herokuapp.com/https://geo.ipify.org/api/v2/country,city?apiKey=at_uAPr1LbdCJl91Tl5D9X1ztkbAu4to&ipAddress=${domainOrIp}`
   );
 
   data = await response.json();
@@ -35,19 +35,19 @@ async function getData(domainOrIp) {
   }
 
   showData(data);
-
 }
 
 let marker = L.marker([50, 50]);
 
 let showData = (data) => {
-
   // show the data on the Dom
   document.getElementById("current-ip").textContent = data.ip;
   document.getElementById(
     "location"
   ).textContent = `${data.location.region}, ${data.location.city}`;
-  document.getElementById("timezone").textContent = `UTC${data.location.timezone}:00`;
+  document.getElementById(
+    "timezone"
+  ).textContent = `UTC${data.location.timezone}:00`;
   document.getElementById("isp").textContent = data.isp;
 
   // map display
@@ -55,17 +55,11 @@ let showData = (data) => {
     iconUrl: "./images/icon-location.svg",
   });
 
-  map.setView(
-    [data.location.lat + 0.01, data.location.lng],
-    13
-  );
+  map.setView([data.location.lat + 0.01, data.location.lng], 13);
 
   marker.remove();
 
-  marker = L.marker(
-    [data.location.lat, data.location.lng],
-    { icon: myIcon }
-  );
+  marker = L.marker([data.location.lat, data.location.lng], { icon: myIcon });
 
   marker.addTo(map);
 };
