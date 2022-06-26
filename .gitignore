@@ -4,5 +4,4 @@
 styles/style.scss
 design/
 prepros.config
-images/icon-arrow.svg
-images/favicon-32x32.png
+js/index.js
